@@ -17,6 +17,6 @@ resource "aws_subnet" "private_subnet" {
   availability_zone     = element(var.AZ, count.index)
 
   tags = {
-    Name = "roboshop-${var.ENV}-pprv-subnet-${element(var.AZ, count.index)}"
+    Name = "roboshop-${var.ENV}-prv-subnet-${element(var.AZ, count.index)}"
   }
 }
