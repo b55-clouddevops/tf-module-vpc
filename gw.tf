@@ -20,12 +20,12 @@ resource "aws_eip" "ngw_ip" {
 # Creates NAT Gateway and will be attached to Public Subnet
 resource "aws_nat_gateway" "ngw" {
   allocation_id = aws_eip.example.id
-  subnet_id     = aws_subnet.example.id
+  subnet_id     = aws_subnet.public_subnet.*.id[0] 
 
   tags = {
     Name = "gw NAT"
   }
-  
+
   # To ensure proper ordering, it is recommended to add an explicit dependency
   # on the Internet Gateway and EIP for the ngw 
   depends_on = [aws_internet_gateway.igw, aws_eip.ngw_ip]
