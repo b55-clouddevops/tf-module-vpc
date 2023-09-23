@@ -45,3 +45,12 @@ resource "aws_route_table" "private_rt" {
     Name = "roboshop-${var.ENV}-private-rt"
   }
 }
+
+
+# Add's subnet association with route table
+resource "aws_route_table_association" "private_rt_association" {
+  count         = length(aws_subnet.private_subnet.*.id)
+
+  subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
+  route_table_id = aws_route_table.private_rt.id
+}
