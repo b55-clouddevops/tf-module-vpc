@@ -7,6 +7,11 @@ resource "aws_route_table" "public_rt" {
     gateway_id = aws_internet_gateway.igw.id
   }
 
+  route {
+    cidr_block = var.DEFAULT_VPC_CIDR
+    gateway_id = aws_internet_gateway.igw.id
+  }
+
   tags = {
     Name = "roboshop-${var.ENV}-public-rt"
   }
